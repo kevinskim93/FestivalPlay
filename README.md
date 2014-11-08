@@ -6,12 +6,12 @@ FestivalPlay is a Java based web application using the Play framework. FestivalP
 ###Data Extraction
 
 1. TicketMaster API
-* The application will begin by querying Ticketmaster API for the list of artists who will be performing at a given event
-* This query will generate the list of artists we will feed into the Spotify API
+	* The application will begin by querying Ticketmaster API for the list of artists who will be performing at a given event
+	* This query will generate the list of artists we will feed into the Spotify API
 
 2. Spotify API
-* Given a list of artist objects, we will parse through their songs, and add their top 5 most played tracks into a playlist object
-* The playlist object will then be POSTed to the user's spotify account
+	* Given a list of artist objects, we will parse through their songs, and add their top 5 most played tracks into a playlist object
+	* The playlist object will then be POSTed to the user's spotify account
 
 3. Play Framework
-* The Play framework will support our application's GET and POST requests
+	* The Play framework will support our application's GET and POST requests

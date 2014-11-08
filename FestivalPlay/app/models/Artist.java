@@ -14,7 +14,7 @@ public class Artist extends Model{
 	
 	//Iterates through songs to get Top Five and returns them
 	public ArrayList<String> getTopFive(){
-		ArrayList<String> topFive = new ArrayList<String>
+		ArrayList<String> topFive = new ArrayList<String>();
 		
 		return topFive;
 	}

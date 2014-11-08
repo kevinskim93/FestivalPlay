@@ -1,14 +1,16 @@
 package models;
 
+import java.io.File;
 import java.io.FileReader;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Map;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import play.db.ebean.Model;
 
@@ -31,22 +33,34 @@ public class Festival extends Model{
 	public Festival(String name){
 		this.name = name;
 		System.out.println(name);
-		
+		final TrackSearchRequest request = api.searchTracks("Mr. Brightside").market("US").build();
+
+		try {
+		   final Page<Track> trackSearchResult = request.get();
+		   System.out.println("I got " + trackSearchResult.getTotal() + " results!");
+		} catch (Exception e) {
+		   System.out.println("Something went wrong!" + e.getMessage());
+		}
+		/*
 		//send information to TicketMaster and get JSON back to parse
+		String urlBase = "https://app.ticketmaster.com/v1/light/events?apikey=";
 		String APIkey = "u63kS9dlzruLsznw2xFAhVVgxftOCpBw";
-		String urlBase = "http://app.ticketmaster.com/v1/light/events?apikey=";
-		generateArtist(urlBase+APIkey);
+		
+		try{
+			URL url = new URL(urlBase+APIkey);
+			InputStream stream = url.openStream();
+			generateArtist(stream);
+		} catch (Exception e){
+			e.printStackTrace();
+		}*/
 	}
 	
 	//Parses JSON for artists
-	public void generateArtist(String url){
+	public void generateArtist(InputStream s){
 		try{
-			JSONParser parser = new JSONParser();
-			Object obj = parser.parse(new FileReader(url));
-			
-			JSONObject jsonObj = (JSONObject) obj;
-			String testing = (String) jsonObj.get("token");
-			System.out.println(testing);
+			ObjectMapper mapper = new ObjectMapper();
+			String string = mapper.readValue(s, String.class);
+			System.out.println(string);
 		}
 		catch(Exception e){
 			e.printStackTrace();

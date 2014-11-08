@@ -18,8 +18,10 @@ public class Festival extends Model {
 	//TicketMaster's official name for this Festival
 	public String name;
 	
-	//After acquiring JSON from TicketMaster find top 5 tracks from
-	//Spotify and add to each Artist for the festival
+	//TicketMaster's list of artists performing at the festival
+	public ArrayList<Artist> artists;
+	
+	//Part where we combine TicketMaster and Spotify for playlist
 	public Map< Artist, ArrayList<String> > artistTopFive;
 	
 	public void generatePlaylist(){

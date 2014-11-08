@@ -12,11 +12,16 @@ public class Artist extends Model{
 	//List of songs from Spotify
 	public ArrayList<String> listOfSongs;
 	
-	//Iterates through songs to get Top Five and returns them
+	/*//gets entire list of songs from Spotify
+	public void getSongs(){
+		
+	}
+	
+	//Iterates through songs from Spotify to get Top Five and returns them
 	public ArrayList<String> getTopFive(){
 		ArrayList<String> topFive = new ArrayList<String>();
 		
 		return topFive;
-	}
+	}*/
 	
 }

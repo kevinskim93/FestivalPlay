@@ -24,7 +24,20 @@ public class Festival extends Model {
 	//Part where we combine TicketMaster and Spotify for playlist
 	public Map< Artist, ArrayList<String> > artistTopFive;
 	
+	public Festival(String name){
+		this.name = name;
+		System.out.println(name);
+		//send information to TicketMaster and get JSON back to parse
+	}
+	
+	//Parses JSON for artists
+	public void generateArtist(){
+		
+	}
+	
 	public void generatePlaylist(){
-		//for each artist a in artistTopFive call a.getTopFive() and add to map
+		for(Artist a : artists){
+			artistTopFive.put(a, a.listOfSongs);
+		}	
 	}
 }

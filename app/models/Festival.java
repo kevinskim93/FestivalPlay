@@ -72,7 +72,7 @@ public class Festival extends Model{
 
 		artists = new ArrayList<Artist>();
 		
-		System.out.println("Here are the performers:");
+		//System.out.println("Here are the performers:");
 		
 		String fest = new String(name.replaceAll(" ", "+"));
 		
@@ -113,7 +113,7 @@ public class Festival extends Model{
 			
 			eventName = (String) event.get("name");
 			
-			System.out.println(eventName);
+			//System.out.println(eventName);
 			
 			//Gets List of artists
 			List list = (List) event.get("artists");
@@ -124,7 +124,7 @@ public class Festival extends Model{
 				Map name1 = (Map) list.get(i);
 				String name = (String) name1.get("name");
 				artists.add(new Artist(name));
-				System.out.println(artists.get(i).toString());
+				//System.out.println(artists.get(i).toString());
 
 			}
 		

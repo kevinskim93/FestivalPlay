@@ -42,14 +42,15 @@ public class Festival extends Model{
 	public String name;
 	public static String eventName;
 	public static Api api;
-	
+	public String code;
 	//TicketMaster's list of artists performing at the festival
 	public static ArrayList<Artist> artists;
 	
 	public static URL url;
 	
-	public Festival(String n){
+	public Festival(String n, String c){
 		name = new String(n);
+		code = c;
 		setAPI();
 		urlParse();	
 		getAuthorization();
@@ -76,8 +77,6 @@ public class Festival extends Model{
 	
 	private void getAuthorization(){
 		/* Application details necessary to get an access token */
-		final String code = "AQCgDCi5YU7t5h_b_71URbPAV6z0Bn5GrXJRfjLH0zlUn2bp5SfKM05f4RJs-yAtvHsjmUawVwXwh5ljgEydbo3zmOFNDUBeXXJ1Th-yzDdxw_w0qU1IVmr9coykwPCWG3zL8uBMWvXCSdq2Elg4-jHjglfj1vt9BZrhMuDdcgnoffi4x5BiTwKaAtqIzZOApm7FbleCUshJeGii6fZRELpk_SMJ0WJYCWCWdnXiGZqO";
-		
 		/* Make a token request. Asynchronous requests are made with the .getAsync method and synchronous requests
 		 * are made with the .get method. This holds for all type of requests. */
 		final SettableFuture<AuthorizationCodeCredentials> authorizationCodeCredentialsFuture = api.authorizationCodeGrant(code).build().getAsync();

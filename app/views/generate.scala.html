@@ -1,6 +1,7 @@
 @(message: String)
 
-@main("FestivalPlay") {
+@main("FestivalPlay"){
+
 <html>
 <head>
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
@@ -136,18 +137,20 @@ function doit() {
 	<div class="site-wrapper">
 		<div class="site-wrapper-inner">
 			<div id="creating" style="text-align: center;">
+				<h1>Creating playlist...</h1>
 			</div>
 			<div id="done" style="display: none; text-align: center;">
-				<h1>Logged in!</h1>
-					
-		<form action = "@routes.Application.generate()" method = "post">
-	    	<input type = "search" placeholder = "Search..." name = "name" />
-
-	    </form><br>
-	    
+				<h1>Done!</h1>
+				<p>
+					<a class="btn btn-lg btn-primary btn-success" id="playlistlink">
+						Open playlist in Spotify
+					</a>
+				</p>
 			</div>
 		</div>
 	</div>
+	<a href = "http://localhost:9000">back</a>
 </body>
 </html>
+
 }

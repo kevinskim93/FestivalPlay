@@ -6,6 +6,7 @@
 GET     /                           controllers.Application.index()
 
 GET		/callback.html				controllers.Application.callback()
+POST			/generate.html				controllers.Application.generate()
 
 POST	/festival					controllers.Application.getFestival()
 

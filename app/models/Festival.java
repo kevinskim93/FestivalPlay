@@ -17,11 +17,15 @@ import javax.persistence.Id;
 import models.Artist;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.util.concurrent.FutureCallback;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.SettableFuture;
 import com.json.parsers.JSONParser;
 import com.json.parsers.JsonParserFactory;
 import com.wrapper.spotify.Api;
 import com.wrapper.spotify.methods.AddTrackToPlaylistRequest;
 import com.wrapper.spotify.methods.PlaylistCreationRequest;
+import com.wrapper.spotify.models.AuthorizationCodeCredentials;
 import com.wrapper.spotify.models.Playlist;
 import com.wrapper.spotify.models.Track;
 
@@ -48,24 +52,61 @@ public class Festival extends Model{
 		name = new String(n);
 		setAPI();
 		urlParse();	
+		getAuthorization();
 		addToPlaylist();
+		System.out.println(eventName);
+	}
+	
+	public ArrayList<Artist> getArtists(){
+		return artists;
 	}
 	
 	//Spotify
 	public void setAPI(){
 		final String clientId = "e61890b23e6d46eeb90fc9818cbe4c29";
 		final String clientSecret = "6929417ed59e4e6a91cdb02bea8222d1";
-		//final String redirectURI = "<your_redirect_uri>";
+		final String redirectURI = "http://localhost:9000/callback.html";
 		api = Api.builder()
 				  .clientId(clientId)
 				  .clientSecret(clientSecret)
-				 // .redirectURI(redirectURI)
+				  .redirectURI(redirectURI)
 				  .build();
 	}
 	
 	
+	private void getAuthorization(){
+		/* Application details necessary to get an access token */
+		final String code = "AQCSqSgk7FOw8tLmraZdAaZhMb-udJDHs1mkYPvXQxM75oy7skPEQcSYawvcf7isWzwFQA21t0U71mRiFiFKrQHHI-NIargrLQK9wcCWlaXBj9ZWGHDbe9KkH92RMzWc7U161k7T9CL5f0UlpHUQEsmbOfCa3oYMI0qHIt7sGuRHAvBTNGRFI3588sgWRD2Mc-brqBTfc9t-Cv5U7lR_9OuNWmc7gkeZsjcobaGcZjAt";
+
+		/* Make a token request. Asynchronous requests are made with the .getAsync method and synchronous requests
+		 * are made with the .get method. This holds for all type of requests. */
+		final SettableFuture<AuthorizationCodeCredentials> authorizationCodeCredentialsFuture = api.authorizationCodeGrant(code).build().getAsync();
+
+		/* Add callbacks to handle success and failure */
+		Futures.addCallback(authorizationCodeCredentialsFuture, new FutureCallback<AuthorizationCodeCredentials>() {
+		  @Override
+		  public void onSuccess(AuthorizationCodeCredentials authorizationCodeCredentials) {
+		    /* The tokens were retrieved successfully! */
+		    System.out.println("Successfully retrieved an access token! " + authorizationCodeCredentials.getAccessToken());
+		    System.out.println("The access token expires in " + authorizationCodeCredentials.getExpiresIn() + " seconds");
+		    System.out.println("Luckily, I can refresh it using this refresh token! " +     authorizationCodeCredentials.getRefreshToken());
+
+		    /* Set the access token and refresh token so that they are used whenever needed */
+		    api.setAccessToken(authorizationCodeCredentials.getAccessToken());
+		    api.setRefreshToken(authorizationCodeCredentials.getRefreshToken());
+		  }
+
+		  @Override
+		  public void onFailure(Throwable throwable) {
+		    /* Let's say that the client id is invalid, or the code has been used more than once,
+		     * the request will fail. Why it fails is written in the throwable's message. */
+
+		  }
+		});
+	}
+		
 	private void addToPlaylist(){
-		final PlaylistCreationRequest request = api.createPlaylist("1249290813", eventName).publicAccess(true).build();
+		final PlaylistCreationRequest request = api.createPlaylist("annekao", eventName).publicAccess(true).build();
 		try{
 			final Playlist playlist = request.get();
 			String pID = playlist.getId();
@@ -74,13 +115,13 @@ public class Festival extends Model{
 				final List<String> tracksToAdd = Arrays.asList("spotify:track:"+a.getTop().get(0).getId(), "spotify:track:"+a.getTop().get(1).getId());
 				
 				final int insertIndex = 3;
-				final AddTrackToPlaylistRequest plRequest = api.addTracksToPlaylist("1249290813", pID, tracksToAdd).position(insertIndex).build();
+				final AddTrackToPlaylistRequest plRequest = api.addTracksToPlaylist("annekao", pID, tracksToAdd).position(insertIndex).build();
 			
 				plRequest.get();
 			}
 		} catch (Exception e){
-			System.out.println("Error adding to playlist");
 			e.printStackTrace();
+			System.out.println("Error adding to playlist");
 		}
 	}
 	

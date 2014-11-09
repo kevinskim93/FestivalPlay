@@ -5,6 +5,8 @@
 # Home page
 GET     /                           controllers.Application.index()
 
+GET		/callback.html				controllers.Application.callback()
+
 POST	/festival					controllers.Application.getFestival()
 
 # Map static resources from the /public folder to the /assets URL path

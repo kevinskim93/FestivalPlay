@@ -1,9 +1,24 @@
 @(message: String)
 
-@main("Welcome to Play") {
+@main("FestivalPlay") {
+<html>
 
-    <form action = "@routes.Application.getFestival()" method = "post">
-    	<input type = "text" name = "name" />
-    	<button>Get Playlist</button>
-    </form>
+<head>
+<link href='http://fonts.googleapis.com/css?family=Titillium+Web' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="../../public/main.css">
+</head>
+
+	<body style = "background-color: #343635">
+		<br>
+		<center><div id = "title">FestivalPlay</div>
+	
+	    <form action = "@routes.Application.getFestival()" method = "post">
+	    	<input type = "search" placeholder = "Search..." name = "name" />
+	    	<button >Get Playlist</button>
+	    </form>
+	    <br>
+	    <br>
+	    </center>
+    </body>
+</html>
 }

@@ -60,9 +60,7 @@ public class Festival extends Model{
 	//Parses JSON for artists
 	public void generateArtist(InputStream s){
 		try{
-			ObjectMapper mapper = new ObjectMapper();
-			String string = mapper.readValue(s, String.class);
-			System.out.println(string);
+			
 		}
 		catch(Exception e){
 			e.printStackTrace();

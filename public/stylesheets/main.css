@@ -1,0 +1,41 @@
+#title{
+	font-family: 'Titillium Web', sans-serif;
+	margin:auto;
+	font-size: 80px;
+	color: #339933;
+}
+
+.text{
+	padding:left: 20px;
+}
+
+
+input[type=search] {
+	-webkit-appearance: textfield;
+	-webkit-box-sizing: content-box;
+	font-family: inherit;
+	font-size: 100%;
+}
+input::-webkit-search-decoration,
+input::-webkit-search-cancel-button {
+	display: none;
+}
+
+#s input[type=search]{
+	width: 15px;
+	padding-left:10px;
+	color:transparent;
+	cursor: pointer;
+}
+
+#s input[type=search]:hover{
+	background-color: white;
+}
+
+#s input[type=search]:focus{
+	width:130px;
+	padding-left: 32px;
+	color: black;
+	background-color: white;
+	cursor: auto;
+}

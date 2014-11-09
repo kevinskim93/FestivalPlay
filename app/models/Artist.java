@@ -12,6 +12,10 @@ public class Artist extends Model{
 	//List of songs from Spotify
 	public ArrayList<String> listOfSongs;
 	
+	public Artist(String name){
+		this.name = name;
+	}
+	
 	public Artist(String id, String name){
 		this.id = id;
 		this.name = name;
@@ -30,5 +34,9 @@ public class Artist extends Model{
 		
 		return topFive;
 	}*/
+	
+	public String toString(){
+		return name;
+	}
 	
 }

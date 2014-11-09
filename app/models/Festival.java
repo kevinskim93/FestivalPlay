@@ -112,13 +112,18 @@ public class Festival extends Model{
 			for (Artist a : artists){
 				System.out.println(a.name);
 				List<String> tracksToAdd = new ArrayList<String>();
-				if(a.getTop().size()!=0){
-					tracksToAdd = Arrays.asList("spotify:track:"+a.getTop().get(0).getId(), "spotify:track:"+a.getTop().get(1).getId());
+				if(a.getTop().size()==3){
+					tracksToAdd = Arrays.asList("spotify:track:"+a.getTop().get(0).getId(), "spotify:track:"+a.getTop().get(1).getId(), "spotify:track:"+a.getTop().get(2).getId());
 					final AddTrackToPlaylistRequest plRequest = api.addTracksToPlaylist("annekao", pID, tracksToAdd).build();
 					plRequest.get();
 				}
 				else if(a.getTop().size()==1){
 					tracksToAdd = Arrays.asList("spotify:track:"+a.getTop().get(0).getId());
+					final AddTrackToPlaylistRequest plRequest = api.addTracksToPlaylist("annekao", pID, tracksToAdd).build();
+					plRequest.get();
+				}
+				else if(a.getTop().size()==2){
+					tracksToAdd = Arrays.asList("spotify:track:"+a.getTop().get(0).getId(), "spotify:track:"+a.getTop().get(1).getId());
 					final AddTrackToPlaylistRequest plRequest = api.addTracksToPlaylist("annekao", pID, tracksToAdd).build();
 					plRequest.get();
 				}

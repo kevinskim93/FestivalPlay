@@ -83,9 +83,10 @@ public class Artist extends Model{
 			System.out.println(tracks.get(1).getName());
 			System.out.println(tracks.get(1).getPopularity());
 			*/
-			if (tracks.get(0)!=null && tracks.get(1)!=null){
-				listOfSongs.add(tracks.get(0));
-				listOfSongs.add(tracks.get(1));
+			for (int i = 0; i < 3; i++){
+				if(tracks.get(i) != null){
+					listOfSongs.add(tracks.get(i));
+				}
 			}
 		} catch (IOException | WebApiException e) {
 			System.out.print(name+": ");

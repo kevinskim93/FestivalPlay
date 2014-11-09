@@ -21,13 +21,13 @@ public class Artist extends Model{
 	public String name;
 	
 	//List of songs from Spotify
-	public ArrayList<String> listOfSongs;
+	public ArrayList<Track> listOfSongs;
 	
 	public static Api api;
 	
 	public Artist(String name){
 		this.name = name;
-		
+		listOfSongs = new ArrayList<Track>();
 		setAPI();
 		associateWithSpotify();
 	}
@@ -53,7 +53,6 @@ public class Artist extends Model{
 		   //System.out.println(artists.get(0).getName());
 		   //System.out.println(artists.get(0).getId());
 		   id = artists.get(0).getId();
-		   
 		   getSongs();
 		} catch (Exception e) {
 		   System.out.println("Something went wrong!" + e.getMessage());
@@ -75,27 +74,29 @@ public class Artist extends Model{
 					return 0;
 				}
 			};
-			final TopTracksRequest topFive = api.getTopTracksForArtist(id, "US").build();
-			final List<Track> tracks = topFive.get();
+			final TopTracksRequest topTen = api.getTopTracksForArtist(id, "US").build();
+			final List<Track> tracks = topTen.get();
 			Collections.sort(tracks, c);
-			/*
-			System.out.println(tracks.get(0).getName());
+			
+			/*System.out.println(tracks.get(0).getName());
 			System.out.println(tracks.get(0).getPopularity());
 			System.out.println(tracks.get(1).getName());
 			System.out.println(tracks.get(1).getPopularity());
 			*/
+			if (tracks.get(0)!=null && tracks.get(1)!=null){
+				listOfSongs.add(tracks.get(0));
+				listOfSongs.add(tracks.get(1));
+			}
 		} catch (IOException | WebApiException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.print(name+": ");
+			System.out.println("error getting songs/adding them");
 		}
 	}
-	/*
+	
 	//Iterates through songs from Spotify to get Top Five and returns them
-	public ArrayList<String> getTopFive(){
-		ArrayList<String> topFive = new ArrayList<String>();
-		
-		return topFive;
-	}*/
+	public ArrayList<Track> getTop(){
+		return listOfSongs;
+	}
 	
 	public String toString(){
 		return name;

@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -18,6 +19,11 @@ import models.Artist;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.json.parsers.JSONParser;
 import com.json.parsers.JsonParserFactory;
+import com.wrapper.spotify.Api;
+import com.wrapper.spotify.methods.AddTrackToPlaylistRequest;
+import com.wrapper.spotify.methods.PlaylistCreationRequest;
+import com.wrapper.spotify.models.Playlist;
+import com.wrapper.spotify.models.Track;
 
 import play.db.ebean.Model;
 
@@ -31,43 +37,54 @@ public class Festival extends Model{
 	//TicketMaster's official name for this Festival
 	public String name;
 	public static String eventName;
+	public static Api api;
 	
 	//TicketMaster's list of artists performing at the festival
 	public static ArrayList<Artist> artists;
-	
-	//Part where we combine TicketMaster and Spotify for playlist
-	public static Map< Artist, ArrayList<String> > artistTopFive;
 	
 	public static URL url;
 	
 	public Festival(String n){
 		name = new String(n);
-		System.out.println(name);
+		setAPI();
 		urlParse();	
-		
+		addToPlaylist();
+	}
+	
+	//Spotify
+	public void setAPI(){
+		final String clientId = "e61890b23e6d46eeb90fc9818cbe4c29";
+		final String clientSecret = "6929417ed59e4e6a91cdb02bea8222d1";
+		//final String redirectURI = "<your_redirect_uri>";
+		api = Api.builder()
+				  .clientId(clientId)
+				  .clientSecret(clientSecret)
+				 // .redirectURI(redirectURI)
+				  .build();
 	}
 	
 	
-	//Ticketmaster
-	
-	//Parses JSON for artists
-	public void generateArtist(InputStream s){
+	private void addToPlaylist(){
+		final PlaylistCreationRequest request = api.createPlaylist("1249290813", eventName).publicAccess(true).build();
 		try{
+			final Playlist playlist = request.get();
+			String pID = playlist.getId();
+			for (Artist a : artists){
+				System.out.println(a.name);
+				final List<String> tracksToAdd = Arrays.asList("spotify:track:"+a.getTop().get(0).getId(), "spotify:track:"+a.getTop().get(1).getId());
+				
+				final int insertIndex = 3;
+				final AddTrackToPlaylistRequest plRequest = api.addTracksToPlaylist("1249290813", pID, tracksToAdd).position(insertIndex).build();
 			
-		}
-		catch(Exception e){
+				plRequest.get();
+			}
+		} catch (Exception e){
+			System.out.println("Error adding to playlist");
 			e.printStackTrace();
 		}
 	}
 	
-	public void generatePlaylist(){
-		for(Artist a : artists){
-			artistTopFive.put(a, a.listOfSongs);
-		}	
-	}
-	
-	
-	
+	//TICKETMASTER JSON PARSING
 	private void urlParse(){
 
 		artists = new ArrayList<Artist>();
@@ -92,14 +109,14 @@ public class Festival extends Model{
 			
 			//System.out.println(jsonReply);
 			
-			parseXML(jsonReply);
+			parseJSON(jsonReply);
 			
 		} catch (Exception e){
 			e.printStackTrace();
 		}	
 	}
 	
-	private void parseXML(String jsonString){
+	private void parseJSON(String jsonString){
 		try {
 			 		
 			JsonParserFactory factory=JsonParserFactory.getInstance();
@@ -127,7 +144,7 @@ public class Festival extends Model{
 				//System.out.println(artists.get(i).toString());
 
 			}
-		
+			
 		} 
 		catch (Exception e) {
 			e.printStackTrace();

@@ -1,8 +1,24 @@
+body{
+		background-image: url("../images/edc.jpg");
+		background-repeat:no-repeat;
+		background-size: cover;
+		font-family: arial;
+	}
 #title{
 	font-family: 'Titillium Web', sans-serif;
-	margin:auto;
 	font-size: 80px;
-	color: #339933;
+	color: #fff;
+
+}
+#banner{
+	margin-top:210px;
+	opacity:.7;
+	color: #fff;
+	background-color:black;
+	width:1350px;
+	height:200px;
+	padding-bottom: 20px;
+	position: absolute;
 }
 
 .text{

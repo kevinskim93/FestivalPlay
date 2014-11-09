@@ -141,7 +141,8 @@ public class Festival extends Model{
 		try {
 			
 			String urlString = "https://app.ticketmaster.com/v1/light/events?apikey=u63k"
-					+ "S9dIzruLsznw2xFAhVVgxftOCpBw&start_date=2013-01-01T18:51:43Z&q="
+					+ "S9dIzruLsznw2xFAhVVgxftOCpBw&start_date=2013-01-01T18:51:43Z"
+					+ "&end_date=2015-01-01T18:51:43Z&q="
 					+ fest
 					+ "&sort_by=match";
 			

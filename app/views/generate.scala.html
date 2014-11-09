@@ -4,6 +4,7 @@
 
 <html>
 <head>
+<link href='http://fonts.googleapis.com/css?family=Titillium+Web' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css" />
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.js"></script>
@@ -116,6 +117,7 @@ function doit() {
 		border: 0;
 		margin: 0;
 		padding: 0;
+		family-font:arial;
 	}
 	.site-wrapper {
 		position: absolute;
@@ -131,25 +133,30 @@ function doit() {
 		width: 500px;
 		height: 100px;
 	}
+	
 </style>
 </head>
 <body onload="doit()">
+<br><br>
+		<div id = "banner"></div>
 	<div class="site-wrapper">
 		<div class="site-wrapper-inner">
+		
 			<div id="creating" style="text-align: center;">
-				<h1>Creating playlist...</h1>
+				<h1 id = "title">Creating playlist...</h1>
 			</div>
 			<div id="done" style="display: none; text-align: center;">
-				<h1>Done!</h1>
+				<h1 id = "title">Done!</h1>
 				<p>
 					<a class="btn btn-lg btn-primary btn-success" id="playlistlink">
 						Open playlist in Spotify
 					</a>
 				</p>
+				
+	<div style = "margin:auto"><a href = "http://localhost:9000">back</a></div>
 			</div>
 		</div>
 	</div>
-	<a href = "http://localhost:9000">back</a>
 </body>
 </html>
 

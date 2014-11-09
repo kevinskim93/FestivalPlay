@@ -3,6 +3,7 @@
 @main("FestivalPlay") {
 <html>
 <head>
+	<link href='http://fonts.googleapis.com/css?family=Titillium+Web' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css" />
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.js"></script>
@@ -108,14 +109,7 @@ function doit() {
 }
 </script>
 <style type="text/css">
-	body {
-		background-color: #333;
-		color: #fff;
-		overflow: hidden;
-		border: 0;
-		margin: 0;
-		padding: 0;
-	}
+	
 	.site-wrapper {
 		position: absolute;
 		left: 0px;
@@ -130,20 +124,24 @@ function doit() {
 		width: 500px;
 		height: 100px;
 	}
+	
 </style>
 </head>
 <body onload="doit()">
+
+<br><br>
+		<div id = "banner"></div>
 	<div class="site-wrapper">
 		<div class="site-wrapper-inner">
 			<div id="creating" style="text-align: center;">
 			</div>
 			<div id="done" style="display: none; text-align: center;">
-				<h1>Logged in!</h1>
+				<h1 id = "title">Logged in!</h1>
 					
-		<form action = "@routes.Application.generate()" method = "post">
-	    	<input type = "search" placeholder = "Search..." name = "name" />
+		<form action = "@routes.Application.generate()" method = "post" style = "color: black">
+	    	<input type = "search" placeholder = "Search..." name = "name"  />
 
-	    </form><br>
+	    </form>
 	    
 			</div>
 		</div>

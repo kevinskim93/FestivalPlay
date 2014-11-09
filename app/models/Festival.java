@@ -15,10 +15,6 @@ import javax.persistence.Id;
 
 import models.Artist;
 
-import com.wrapper.spotify.*;
-import com.wrapper.spotify.methods.TrackSearchRequest;
-import com.wrapper.spotify.models.Page;
-import com.wrapper.spotify.models.Track;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.json.parsers.JSONParser;
 import com.json.parsers.JsonParserFactory;
@@ -42,37 +38,17 @@ public class Festival extends Model{
 	//Part where we combine TicketMaster and Spotify for playlist
 	public static Map< Artist, ArrayList<String> > artistTopFive;
 	
-	public static Api api;
 	public static URL url;
 	
 	public Festival(String n){
 		name = new String(n);
 		System.out.println(name);
-		setAPI();
-		urlParse();
-		
-		
-		
-		
+		urlParse();	
 		
 	}
 	
 	
 	//Ticketmaster
-	
-	
-	
-	//Spotify
-	public void setAPI(){
-		final String clientId = "e61890b23e6d46eeb90fc9818cbe4c29";
-		final String clientSecret = "6929417ed59e4e6a91cdb02bea8222d1";
-		//final String redirectURI = "<your_redirect_uri>";
-		api = Api.builder()
-				  .clientId(clientId)
-				  .clientSecret(clientSecret)
-				 // .redirectURI(redirectURI)
-				  .build();
-	}
 	
 	//Parses JSON for artists
 	public void generateArtist(InputStream s){

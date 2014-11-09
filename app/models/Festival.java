@@ -76,8 +76,8 @@ public class Festival extends Model{
 	
 	private void getAuthorization(){
 		/* Application details necessary to get an access token */
-		final String code = "AQCSqSgk7FOw8tLmraZdAaZhMb-udJDHs1mkYPvXQxM75oy7skPEQcSYawvcf7isWzwFQA21t0U71mRiFiFKrQHHI-NIargrLQK9wcCWlaXBj9ZWGHDbe9KkH92RMzWc7U161k7T9CL5f0UlpHUQEsmbOfCa3oYMI0qHIt7sGuRHAvBTNGRFI3588sgWRD2Mc-brqBTfc9t-Cv5U7lR_9OuNWmc7gkeZsjcobaGcZjAt";
-
+		final String code = "AQCgDCi5YU7t5h_b_71URbPAV6z0Bn5GrXJRfjLH0zlUn2bp5SfKM05f4RJs-yAtvHsjmUawVwXwh5ljgEydbo3zmOFNDUBeXXJ1Th-yzDdxw_w0qU1IVmr9coykwPCWG3zL8uBMWvXCSdq2Elg4-jHjglfj1vt9BZrhMuDdcgnoffi4x5BiTwKaAtqIzZOApm7FbleCUshJeGii6fZRELpk_SMJ0WJYCWCWdnXiGZqO";
+		
 		/* Make a token request. Asynchronous requests are made with the .getAsync method and synchronous requests
 		 * are made with the .get method. This holds for all type of requests. */
 		final SettableFuture<AuthorizationCodeCredentials> authorizationCodeCredentialsFuture = api.authorizationCodeGrant(code).build().getAsync();
@@ -112,12 +112,17 @@ public class Festival extends Model{
 			String pID = playlist.getId();
 			for (Artist a : artists){
 				System.out.println(a.name);
-				final List<String> tracksToAdd = Arrays.asList("spotify:track:"+a.getTop().get(0).getId(), "spotify:track:"+a.getTop().get(1).getId());
-				
-				final int insertIndex = 3;
-				final AddTrackToPlaylistRequest plRequest = api.addTracksToPlaylist("annekao", pID, tracksToAdd).position(insertIndex).build();
-			
-				plRequest.get();
+				List<String> tracksToAdd = new ArrayList<String>();
+				if(a.getTop().size()!=0){
+					tracksToAdd = Arrays.asList("spotify:track:"+a.getTop().get(0).getId(), "spotify:track:"+a.getTop().get(1).getId());
+					final AddTrackToPlaylistRequest plRequest = api.addTracksToPlaylist("annekao", pID, tracksToAdd).build();
+					plRequest.get();
+				}
+				else if(a.getTop().size()==1){
+					tracksToAdd = Arrays.asList("spotify:track:"+a.getTop().get(0).getId());
+					final AddTrackToPlaylistRequest plRequest = api.addTracksToPlaylist("annekao", pID, tracksToAdd).build();
+					plRequest.get();
+				}
 			}
 		} catch (Exception e){
 			e.printStackTrace();

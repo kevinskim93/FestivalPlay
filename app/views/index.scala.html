@@ -2,6 +2,8 @@
 
 @main("Welcome to Play") {
 
-    @play20.welcome(message, style = "Java")
-
+    <form action = "@routes.Application.getFestival()" method = "post">
+    	<input type = "text" name = "name" />
+    	<button>Get Playlist</button>
+    </form>
 }

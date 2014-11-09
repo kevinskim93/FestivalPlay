@@ -1,4 +1,4 @@
-name := """FestivalPlay"""
+name := """Test"""
 
 version := "1.0-SNAPSHOT"
 
@@ -12,3 +12,5 @@ libraryDependencies ++= Seq(
   cache,
   javaWs
 )
+
+libraryDependencies += 	"se.michaelthelin.spotify" % "spotify-web-api-java" % "1.4.9"

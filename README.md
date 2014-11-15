@@ -10,6 +10,13 @@ FestivalPlay is a Java based web application using the Play framework. FestivalP
 	* Here is the link to our ChallengePost submission, which also contains a gallery of images
 	* http://challengepost.com/software/festivalplay
 
+###Code Location
+1. Java Back-End
+	* All Java back-end code can be found in app/models/
+	* These classes essentially contain the search queries and API calls
+2. HTML and Javascript Front-End
+	* Front-end UI and Spotify Authentication can be found in app/views/
+
 ###Data Extraction
 
 1. TicketMaster API

@@ -1,7 +1,14 @@
 FestivalPlay
 ============
 
-FestivalPlay is a Java based web application using the Play framework. FestivalPlay generates playlists with a list of popular tracks given a set of artists who will be performing at a given festival. For example, provided the input "Coachella", the application will output a playlist of the top 3 songs of all the artists playing at Coachella.
+FestivalPlay is a Java based web application using the Play framework. FestivalPlay generates playlists with a list of popular tracks given a set of artists who will be performing at a given festival. For example, provided the input "Coachella", the application will output a playlist of the top 3 songs of all the artists playing at Coachella. The user's queries will generate an entire playlist (typically anywhere from 1 hour to 4 hours long) of songs related to events they may be interested in attending!
+
+###Website and Details
+1. Website
+	* FestivalPlay will be available online soon, currently working on web hosting
+2. ChallengePost
+	* Here is the link to our ChallengePost submission, which also contains a gallery of images
+	* http://challengepost.com/software/festivalplay
 
 ###Data Extraction
 
